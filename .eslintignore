@@ -1,4 +1,4 @@
 demo
-plugin/index.cjs
-plugin/index.d.ts
-plugin/index.mjs
+plugin/*.js
+plugin/*.cjs
+plugin/*.mjs

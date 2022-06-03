@@ -1,7 +1,3 @@
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
 const pluginOptionsSchema = ({ Joi }) => {
   return Joi.object().keys({
     gsap: Joi.boolean().description("Enable GSAP ScrollTrigger for smooth-scrollbar"),
@@ -21,5 +17,4 @@ const onPreInit = (_, pluginOptions) => {
   console.log(pluginOptions);
 };
 
-exports.onPreInit = onPreInit;
-exports.pluginOptionsSchema = pluginOptionsSchema;
+export { onPreInit, pluginOptionsSchema };

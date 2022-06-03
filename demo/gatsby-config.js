@@ -10,6 +10,19 @@ module.exports = {
     'gatsby-plugin-pnpm',
     {
       resolve: require.resolve('../plugin'),
+      options: {
+        scrollbarOptions: {
+          plugins: {
+            overscroll: {
+              enable: true,
+              effect: 'bounce',
+              damping: 0.2,
+              maxOverscroll: 150,
+              glowColor: '#222a2d',
+            },
+          }
+        }
+      }
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-image',

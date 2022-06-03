@@ -1,10 +1,49 @@
+import type { BuildEntry } from 'unbuild'
 import { defineBuildConfig } from 'unbuild'
+import packageJSON from './package.json'
 // import cpy from 'cpy';
 // import del from 'del'
 
+// const entries: BuildEntry[] = []
+// const exportsList = packageJSON.exports
+// const match = './lib/'
+
+// Object.keys(exportsList).forEach((key) => {
+//   if (key.slice(0, match.length) !== match)
+//     return
+
+//   const importValue = exportsList[key].import
+//   if (importValue === `${key}.mjs`) {
+//     const name = key.slice(match.length)
+//     entries.push({
+//       input: `src/${name}`,
+//       name,
+//     })
+//   }
+// })
+
+// export default defineBuildConfig({
+//   outDir: './',
+//   entries,
+//   clean: true,
+//   declaration: true,
+//   rollup: {
+//     emitCJS: true,
+//   },
+// })
+
 export default defineBuildConfig({
   entries: [
-    'src/index',
+    'src/gatsby-browser',
+    'src/gatsby-node',
+    'src/gatsby-ssr',
+    {
+      input: 'src/index',
+    },
+    {
+      input: 'src/plugins/overscroll',
+      name: 'plugins/overscroll',
+    },
   ],
   outDir: './',
   declaration: true,
