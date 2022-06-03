@@ -1,0 +1,31 @@
+{
+  "name": "smooth-scrollbar-gatsby",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
+    "dev": "gatsby develop",
+    "build": "gatsby build",
+    "preview": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^4.15.1",
+    "gatsby-plugin-image": "^2.15.0",
+    "gatsby-plugin-manifest": "^4.15.0",
+    "gatsby-plugin-pnpm": "1.2.10",
+    "gatsby-plugin-react-helmet": "^5.15.0",
+    "gatsby-plugin-sharp": "^4.15.0",
+    "gatsby-source-filesystem": "^4.15.0",
+    "gatsby-transformer-sharp": "^4.15.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
+    "smooth-scrollbar": "8.7.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
+  }
+}

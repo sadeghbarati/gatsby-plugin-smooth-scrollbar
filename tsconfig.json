@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2018",
+    "module": "esnext",
+    "lib": ["esnext", "DOM"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "plugin": ["./plugin/src"]
+    }
+  },
+  "include": [
+    "plugin/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "demo"
+  ]
+}
