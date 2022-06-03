@@ -8,19 +8,26 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 const Scrollbar__default = /*#__PURE__*/_interopDefaultLegacy(Scrollbar);
 
+let scrollbarIns;
 const onClientEntry = (_, pluginOptions) => {
-  console.log(pluginOptions);
+  if (pluginOptions.gsap && pluginOptions.gsap !== "undefined") {
+    import('./plugins/scrolltrigger.cjs').then(({ scrollTrigger }) => {
+      Scrollbar__default.use(scrollTrigger.default);
+    }).catch((err) => {
+      console.error(err, "GSAP ScrollTrigger err");
+    });
+  }
   const { scrollbarOptions } = pluginOptions;
   if (scrollbarOptions.plugins.overscroll ?? false) {
     import('./plugins/overscroll.cjs').then((over) => {
       Scrollbar__default.use(over.OverscrollPlugin);
     }).catch((err) => {
-      console.error(err);
+      console.error(err, "OverscrollPlugin err");
     });
   }
 };
 const onInitialClientRender = (_, { scrollbarOptions }) => {
-  Scrollbar__default.init(document.getElementById("___gatsby"), scrollbarOptions);
+  scrollbarIns = Scrollbar__default.init(document.getElementById("___gatsby"), scrollbarOptions);
 };
 const onRouteUpdate = ({ location, prevLocation }, scrollbarOptions) => {
 };
@@ -28,7 +35,7 @@ const shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition
 }, scrollbarOptions) => {
-  Scrollbar__default.get(document.getElementById("___gatsby")).update();
+  scrollbarIns.update();
   return false;
 };
 

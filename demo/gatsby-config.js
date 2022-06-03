@@ -11,6 +11,7 @@ module.exports = {
     {
       resolve: require.resolve('../plugin'),
       options: {
+        gsap: true,
         scrollbarOptions: {
           plugins: {
             overscroll: {

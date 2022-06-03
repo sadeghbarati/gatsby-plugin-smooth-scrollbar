@@ -1,8 +1,16 @@
 // @ts-nocheck
-import Scrollbar from './index'
+import Scrollbar from 'smooth-scrollbar'
+
+let scrollbarIns: Scrollbar
 
 export const onClientEntry = (_, pluginOptions) => {
-  console.log(pluginOptions)
+  if (pluginOptions.gsap && pluginOptions.gsap !== 'undefined') {
+    import('./plugins/scrolltrigger').then(({ scrollTrigger }) => {
+      Scrollbar.use(scrollTrigger.default)
+    }).catch((err) => {
+      console.error(err, 'GSAP ScrollTrigger err')
+    })
+  }
 
   const { scrollbarOptions } = pluginOptions
 
@@ -10,13 +18,13 @@ export const onClientEntry = (_, pluginOptions) => {
     import('./plugins/overscroll').then((over) => {
       Scrollbar.use(over.OverscrollPlugin)
     }).catch((err) => {
-      console.error(err)
+      console.error(err, 'OverscrollPlugin err')
     })
   }
 }
 
 export const onInitialClientRender = (_, { scrollbarOptions }) => {
-  Scrollbar.init(document.getElementById('___gatsby'), scrollbarOptions)
+  scrollbarIns = Scrollbar.init(document.getElementById('___gatsby'), scrollbarOptions)
 }
 
 export const onRouteUpdate = ({ location, prevLocation }, scrollbarOptions) => {
@@ -34,6 +42,9 @@ export const shouldUpdateScroll = ({
   getSavedScrollPosition,
 }, scrollbarOptions) => {
   // const currentPosition = getSavedScrollPosition(location)
-  Scrollbar.get(document.getElementById('___gatsby')).update()
+  // Scrollbar.get(document.getElementById('___gatsby')).update()
+
+  scrollbarIns.update()
+
   return false
 }

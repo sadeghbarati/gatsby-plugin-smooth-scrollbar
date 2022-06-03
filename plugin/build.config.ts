@@ -44,6 +44,10 @@ export default defineBuildConfig({
       input: 'src/plugins/overscroll',
       name: 'plugins/overscroll',
     },
+    {
+      input: 'src/plugins/scrolltrigger',
+      name: 'plugins/scrolltrigger',
+    },
   ],
   outDir: './',
   declaration: true,
@@ -64,7 +68,9 @@ export default defineBuildConfig({
     //   await del(['index.cjs', 'index.d.ts', 'index.mjs'])
     // },
   },
+  externals: ['gsap'],
   rollup: {
+    inlineDependencies: false,
     emitCJS: true,
   },
 })

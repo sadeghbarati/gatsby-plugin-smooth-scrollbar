@@ -2,3 +2,4 @@ demo
 plugin/*.js
 plugin/*.cjs
 plugin/*.mjs
+plugin/plugins/*

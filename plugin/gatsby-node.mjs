@@ -1,3 +1,17 @@
+import path from 'node:path';
+
+const currentPkgEs = (from) => {
+  from = from || process.cwd();
+  const fp = path.join(from, "package.json");
+  const result = {};
+  try {
+    const pkg = require(fp);
+    result.pkg = pkg;
+  } catch (error) {
+    result.error = error;
+  }
+  return result;
+};
 const pluginOptionsSchema = ({ Joi }) => {
   return Joi.object().keys({
     gsap: Joi.boolean().description("Enable GSAP ScrollTrigger for smooth-scrollbar"),
@@ -14,7 +28,7 @@ const pluginOptionsSchema = ({ Joi }) => {
   });
 };
 const onPreInit = (_, pluginOptions) => {
-  console.log(pluginOptions);
+  console.log(currentPkgEs());
 };
 
 export { onPreInit, pluginOptionsSchema };

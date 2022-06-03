@@ -1,4 +1,28 @@
 // @ts-nocheck
+import path from 'node:path'
+// import {
+//   getPackageInfo,
+//   importModule,
+//   isPackageExists,
+//   resolveModule,
+// } from 'local-pkg'
+
+const currentPkgEs = (from) => {
+  from = from || process.cwd()
+  const fp = path.join(from, 'package.json')
+  const result = {}
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const pkg = require(fp)
+    result.pkg = pkg
+  }
+  catch (error) {
+    result.error = error
+  }
+  return result
+}
+
+// @ts-nocheck
 export const pluginOptionsSchema = ({ Joi }) => {
   return Joi.object().keys({
     gsap: Joi.boolean().description('Enable GSAP ScrollTrigger for smooth-scrollbar'),
@@ -16,7 +40,13 @@ export const pluginOptionsSchema = ({ Joi }) => {
 }
 
 export const onPreInit = (_, pluginOptions) => {
-  console.log(pluginOptions)
+  console.log(currentPkgEs())
+
+  // if (pluginOptions.gsap === true && !isPackageExists('gsap')) {
+  //   console.error('Please Install GSAP as dependencies or pass autoInstall true')
+  //   return false
+  // }
+
   // actions.setPluginStatus({ lastFetched: Date.now() })
   // const plugins = pluginOptions.scrollbarPlugins
   // delete pluginOptions.plugins
