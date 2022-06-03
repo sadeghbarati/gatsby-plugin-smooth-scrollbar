@@ -2,8 +2,8 @@
 
 ## Todos
 
-[ ] window.navigator is not defined in server-side, check navigator gatsby-browser
-[ ] add gsap scrollTrigger
+* [ ] window.navigator is not defined in server-side, check navigator gatsby-browser
+* [ ] add gsap scrollTrigger
 ```js
 {
   resolve: require.resolve('../plugin'),
@@ -23,4 +23,4 @@
   }
 },
 ```
-[ ] Cuberto github smooth-scrollbar plugins
+* [ ] Cuberto github smooth-scrollbar plugins
