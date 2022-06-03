@@ -1,11 +1,5 @@
 // @ts-nocheck
 import path from 'node:path'
-// import {
-//   getPackageInfo,
-//   importModule,
-//   isPackageExists,
-//   resolveModule,
-// } from 'local-pkg'
 
 const currentPkgEs = (from) => {
   from = from || process.cwd()
@@ -40,12 +34,16 @@ export const pluginOptionsSchema = ({ Joi }) => {
 }
 
 export const onPreInit = (_, pluginOptions) => {
-  console.log(currentPkgEs())
+  const {
+    pkg: {
+      dependencies,
+    },
+  } = currentPkgEs()
 
-  // if (pluginOptions.gsap === true && !isPackageExists('gsap')) {
-  //   console.error('Please Install GSAP as dependencies or pass autoInstall true')
-  //   return false
-  // }
+  if (pluginOptions.gsap === true && typeof dependencies.gsap === 'undefined') {
+    console.error('Please install GSAP as dependencies then restart Gatsby server')
+    return false
+  }
 
   // actions.setPluginStatus({ lastFetched: Date.now() })
   // const plugins = pluginOptions.scrollbarPlugins

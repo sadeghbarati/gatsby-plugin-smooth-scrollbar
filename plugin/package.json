@@ -56,10 +56,7 @@
     "gsap": "^3.10.4"
   },
   "devDependencies": {
-    "current-pkg": "0.1.0",
-    "local-pkg": "0.4.1",
     "smooth-scrollbar": "8.7.4",
-    "tsup": "^6.0.1",
     "unbuild": "0.7.4"
   }
 }

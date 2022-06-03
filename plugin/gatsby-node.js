@@ -36,7 +36,17 @@ const pluginOptionsSchema = ({ Joi }) => {
   });
 };
 const onPreInit = (_, pluginOptions) => {
-  console.log(currentPkgEs());
+  const {
+    pkg: {
+      dependencies
+    }
+  } = currentPkgEs();
+  console.log(typeof dependencies.gsap === "undefined");
+  console.log(pluginOptions);
+  if (pluginOptions.gsap === true && typeof dependencies.gsap === "undefined") {
+    console.error("Please Install GSAP as dependencies or pass autoInstall true");
+    return false;
+  }
 };
 
 exports.onPreInit = onPreInit;
