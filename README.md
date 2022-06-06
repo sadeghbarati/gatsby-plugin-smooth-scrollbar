@@ -3,7 +3,7 @@
 ## Todos
 
 * [ ] window.navigator is not defined in server-side, check navigator gatsby-browser
-* [ ] add gsap scrollTrigger
+* [x] add gsap scrollTrigger
 ```js
 {
   resolve: require.resolve('../plugin'),
