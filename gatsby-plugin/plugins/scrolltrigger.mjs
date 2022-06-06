@@ -1,4 +1,4 @@
-import Scrollbar from 'smooth-scrollbar';
+import { ScrollbarPlugin } from 'smooth-scrollbar';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
@@ -9,27 +9,24 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
  * @author Artem Dordzhiev (Draft)
  */
 gsap.registerPlugin(ScrollTrigger);
-class ScrollTriggerPlugin extends Scrollbar.ScrollbarPlugin {
+class ScrollTriggerPlugin extends ScrollbarPlugin {
   constructor(scrollbar, options) {
     super(scrollbar, options);
     this.setProxy();
   }
   setProxy() {
     const scrollbar = this.scrollbar;
-    ScrollTrigger.scrollerProxy(document.body, {
+    ScrollTrigger.scrollerProxy(this.options.target, {
       scrollTop(value) {
         if (arguments.length)
           scrollbar.scrollTop = value;
         return scrollbar.scrollTop;
-      },
-      getBoundingClientRect() {
-        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-      },
-      pinType: "transform"
+      }
     });
     scrollbar.addListener(ScrollTrigger.update);
+    console.log("SCrollBAR SCROLLTRIGGER");
   }
 }
-ScrollTriggerPlugin.pluginName = "ScrollTrigger";
+ScrollTriggerPlugin.pluginName = "scrollTrigger";
 
 export { ScrollTriggerPlugin as default };

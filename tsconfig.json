@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "es2018",
-    "module": "esnext",
-    "lib": ["esnext", "DOM"],
+    "module": "commonjs",
+    "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
@@ -10,12 +10,13 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
+    "jsx": "preserve",
     "paths": {
-      "plugin": ["./plugin/src"]
+      "gatsby-plugin": ["./gatsby-plugin/src"]
     }
   },
   "include": [
-    "plugin/**/*.ts"
+    "gatsby-plugin/**/*.ts"
   ],
   "exclude": [
     "node_modules",

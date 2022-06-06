@@ -16,7 +16,7 @@ import packageJSON from './package.json'
 //   if (importValue === `${key}.mjs`) {
 //     const name = key.slice(match.length)
 //     entries.push({
-//       input: `src/${name}`,
+//       input: `source/${name}`,
 //       name,
 //     })
 //   }
@@ -34,31 +34,40 @@ import packageJSON from './package.json'
 
 export default defineBuildConfig({
   entries: [
-    'src/gatsby-browser',
-    'src/gatsby-node',
-    'src/gatsby-ssr',
     {
-      input: 'src/index',
+      input: 'source/gatsby-browser',
+      declaration: false,
+      format: 'cjs',
     },
     {
-      input: 'src/plugins/overscroll',
-      name: 'plugins/overscroll',
+      input: 'source/gatsby-node',
+      declaration: false,
+      format: 'cjs',
     },
     {
-      input: 'src/plugins/scrolltrigger',
+      input: 'source/gatsby-ssr',
+      declaration: false,
+      format: 'cjs',
+    },
+    {
+      input: 'source/index',
+      declaration: true,
+    },
+    {
+      input: 'source/plugins/scrolltrigger',
       name: 'plugins/scrolltrigger',
+      declaration: true,
     },
   ],
   outDir: './',
-  declaration: true,
   clean: false,
   hooks: {
     // "build:done": async(ctx) => {
     //   await cpy([
-    //     'src/gatsby-browser.js',
-    //     'src/gatsby-node.js',
-    //     'src/gatsby-ssr.js',
-    //     'src/package.json',
+    //     'source/gatsby-browser.js',
+    //     'source/gatsby-node.js',
+    //     'source/gatsby-ssr.js',
+    //     'source/package.json',
     //   ], 'dist', {
     //     flat: true
     //   });
@@ -68,7 +77,7 @@ export default defineBuildConfig({
     //   await del(['index.cjs', 'index.d.ts', 'index.mjs'])
     // },
   },
-  externals: ['gsap'],
+  externals: ['gsap', 'react', 'read-pkg'],
   rollup: {
     inlineDependencies: false,
     emitCJS: true,

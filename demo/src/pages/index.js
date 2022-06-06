@@ -1,10 +1,18 @@
 import * as React from 'react'
 import { Link } from 'gatsby'
 import { StaticImage } from 'gatsby-plugin-image'
+import { gsap } from 'gsap'
+
+// import SmoothScrollbar from 'smooth-scrollbar'
+
+
 
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import * as styles from '../components/index.module.css'
+
+
+//ScrollTrigger.defaults({ scroller: document.body });
 
 const links = [
   {
@@ -67,7 +75,30 @@ const moreLinks = [
 
 const utmParameters = '?utm_source=starter&utm_medium=start-page&utm_campaign=default-starter'
 
-const IndexPage = () => (
+const IndexPage = () => {
+
+
+  React.useEffect(() => {
+
+    console.log('Client Render')
+
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".trigger",
+        start: "0 30%",
+        end: "center top",
+        scrub: true,
+        pin: true,
+        markers: true
+      }
+    });
+    tl.to(".box", {yPercent: 350, duration: 1})
+    tl.to(".box", {rotation: 360, duration: 3})
+    tl.to(".box", {xPercent: 350, duration: 1})
+  }, []);
+
+  return (
   <Layout>
     <Seo title="Home" />
     <div className={styles.textCenter}>
@@ -142,7 +173,9 @@ const IndexPage = () => (
     <br/>
     <br/>
 
-    Scroll
+    <div className="trigger">
+      <div className="box"></div>
+    </div>
 
     <br/>
     <br/>
@@ -187,5 +220,6 @@ const IndexPage = () => (
     ))}
   </Layout>
 )
+}
 
 export default IndexPage

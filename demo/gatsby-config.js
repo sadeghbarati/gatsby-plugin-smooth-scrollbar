@@ -9,19 +9,19 @@ module.exports = {
   plugins: [
     'gatsby-plugin-pnpm',
     {
-      resolve: require.resolve('../plugin'),
+      resolve: require.resolve('../gatsby-plugin'),
       options: {
         gsap: true,
         scrollbarOptions: {
-          plugins: {
-            overscroll: {
-              enable: true,
-              effect: 'bounce',
-              damping: 0.2,
-              maxOverscroll: 150,
-              glowColor: '#222a2d',
-            },
-          }
+          // plugins: {
+          //   overscroll: {
+          //     enable: true,
+          //     effect: 'bounce',
+          //     damping: 0.2,
+          //     maxOverscroll: 150,
+          //     glowColor: '#222a2d',
+          //   },
+          // }
         }
       }
     },
