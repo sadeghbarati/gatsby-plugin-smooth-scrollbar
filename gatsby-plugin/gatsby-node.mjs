@@ -1,48 +1,3 @@
-import path from 'node:path';
-import { promises } from 'node:fs';
-
-const htmlShadow = (className) => {
-  const content = `import React from 'react'
-  import PropTypes from 'prop-types'
-
-  export default function HTML(props) {
-    return (
-      <html {...props.htmlAttributes}>
-        <head>
-          <meta charSet="utf-8" />
-          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          {props.headComponents}
-        </head>
-        <body {...props.bodyAttributes}>
-          {props.preBodyComponents}
-          <div className="${className}" data-gatsby-scrollbar>
-            <div
-              key={'body'}
-              id="___gatsby"
-              dangerouslySetInnerHTML={{ __html: props.body }}
-            />
-          </div>
-          {props.postBodyComponents}
-        </body>
-      </html>
-    )
-  }
-
-  HTML.propTypes = {
-    htmlAttributes: PropTypes.object,
-    headComponents: PropTypes.array,
-    bodyAttributes: PropTypes.object,
-    preBodyComponents: PropTypes.array,
-    body: PropTypes.string,
-    postBodyComponents: PropTypes.array,
-  }
-  `;
-  return content;
-};
 const pluginOptionsSchema = ({ Joi }) => {
   return Joi.object().keys({
     html: Joi.object().keys({
@@ -62,13 +17,6 @@ const pluginOptionsSchema = ({ Joi }) => {
   });
 };
 const onPreInit = (_, pluginOptions) => {
-  (async () => {
-    try {
-      await promises.writeFile(path.join(process.cwd(), "src", "html.js"), htmlShadow("class-example"));
-    } catch (error) {
-      console.error(error);
-    }
-  })();
   import('read-pkg').then(async (pkg) => {
     const {
       dependencies

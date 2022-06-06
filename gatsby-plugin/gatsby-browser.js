@@ -2,6 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+const ssrWindow = require('ssr-window');
 const SmoothScrollbar = require('smooth-scrollbar');
 const gsap = require('gsap');
 const ScrollTrigger = require('gsap/ScrollTrigger');
@@ -11,6 +12,8 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 
 const SmoothScrollbar__default = /*#__PURE__*/_interopDefaultLegacy(SmoothScrollbar);
 
+const window = ssrWindow.getWindow();
+const document = ssrWindow.getDocument();
 if (typeof window !== "undefined")
   gsap.gsap.registerPlugin(ScrollTrigger.ScrollTrigger);
 let scrollbarIns;
@@ -28,12 +31,16 @@ const wrapRootElement = ({ element }, pluginOptions) => {
 };
 const onClientEntry = (_, pluginOptions) => {
   const { scrollbarOptions } = pluginOptions;
+  SmoothScrollbar__default.detachStyle();
   scrollbarIns = SmoothScrollbar__default.init(scrollbarTarget, {
     delegateTo: document,
     plugins,
     ...scrollbarOptions
   });
   console.log(scrollbarIns);
+  ssrWindow.extend(ssrWindow.ssrWindow, {
+    smoothScrollbar: scrollbarIns
+  });
   window.smoothScrollbar = scrollbarIns;
   ScrollTrigger.ScrollTrigger.defaults({
     scroller: scrollbarTarget,
@@ -41,30 +48,27 @@ const onClientEntry = (_, pluginOptions) => {
   });
 };
 const onInitialClientRender = (_, { scrollbarOptions }) => {
-  if (document.querySelector(".gsap-marker-scroller-start")) {
-    const markers = gsap.gsap.utils.toArray('[class *= "gsap-marker"]');
-    console.log(markers);
-    scrollbarIns.addListener(({ offset }) => {
-      console.log(offset);
-      gsap.gsap.set(markers, { marginTop: -offset.y });
-    });
+  if (document) {
+    if (document.querySelector(".gsap-marker-scroller-start")) {
+      const markers = gsap.gsap.utils.toArray('[class *= "gsap-marker"]');
+      if (window) {
+        window.smoothScrollbar.addListener(({ offset }) => {
+          gsap.gsap.set(markers, { marginTop: -offset.y });
+        });
+      }
+    }
   }
-};
-const onRouteUpdate = ({ location, prevLocation }, scrollbarOptions) => {
-};
-const onRouteUpdateDelayed = ({ location, prevLocation }, scrollbarOptions) => {
 };
 const shouldUpdateScroll = ({
   routerProps: { location },
   getSavedScrollPosition
 }, scrollbarOptions) => {
   scrollbarIns.update();
+  console.log("shouldUpdateScroll");
   return false;
 };
 
 exports.onClientEntry = onClientEntry;
 exports.onInitialClientRender = onInitialClientRender;
-exports.onRouteUpdate = onRouteUpdate;
-exports.onRouteUpdateDelayed = onRouteUpdateDelayed;
 exports.shouldUpdateScroll = shouldUpdateScroll;
 exports.wrapRootElement = wrapRootElement;

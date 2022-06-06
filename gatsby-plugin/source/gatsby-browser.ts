@@ -1,10 +1,13 @@
 // @ts-nocheck
-import React, { useEffect, useRef } from 'react'
+import { extend, getDocument, getWindow, ssrDocument, ssrWindow } from 'ssr-window'
+import React from 'react'
 import SmoothScrollbar from 'smooth-scrollbar'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import ScrollTriggerPlugin from './plugins/scrolltrigger'
-// import { SmoothScrollbar } from './components/SmoothScrollbar'
+
+const window = getWindow()
+const document = getDocument()
 
 if (typeof window !== 'undefined')
   gsap.registerPlugin(ScrollTrigger)
@@ -14,6 +17,7 @@ let scrollbarTarget
 const plugins = {}
 export const wrapRootElement = ({ element }, pluginOptions) => {
   scrollbarTarget = pluginOptions.html ?? false ? document.querySelector('[data-gatsby-scrollbar]') : document.body
+
   console.log(scrollbarTarget)
 
   if (pluginOptions.gsap ?? false) {
@@ -28,6 +32,8 @@ export const wrapRootElement = ({ element }, pluginOptions) => {
 export const onClientEntry = (_, pluginOptions) => {
   const { scrollbarOptions } = pluginOptions
 
+  SmoothScrollbar.detachStyle()
+
   scrollbarIns = SmoothScrollbar.init(scrollbarTarget, {
     delegateTo: document,
     plugins,
@@ -35,6 +41,11 @@ export const onClientEntry = (_, pluginOptions) => {
   })
 
   console.log(scrollbarIns)
+
+  extend(ssrWindow, {
+    smoothScrollbar: scrollbarIns,
+  })
+
   window.smoothScrollbar = scrollbarIns
 
   ScrollTrigger.defaults({
@@ -44,26 +55,22 @@ export const onClientEntry = (_, pluginOptions) => {
 }
 
 export const onInitialClientRender = (_, { scrollbarOptions }) => {
-  if (document.querySelector('.gsap-marker-scroller-start')) {
-    const markers = gsap.utils.toArray('[class *= "gsap-marker"]')
+  if (document) {
+    if (document.querySelector('.gsap-marker-scroller-start')) {
+      const markers = gsap.utils.toArray('[class *= "gsap-marker"]')
 
-    console.log(markers)
-    scrollbarIns.addListener(({ offset }) => {
-      console.log(offset)
-      gsap.set(markers, { marginTop: -offset.y })
-    })
+      if (window) {
+        window.smoothScrollbar.addListener(({ offset }) => {
+          gsap.set(markers, { marginTop: -offset.y })
+        })
+      }
+    }
   }
 }
 
-export const onRouteUpdate = ({ location, prevLocation }, scrollbarOptions) => {
-
-}
-
-export const onRouteUpdateDelayed = ({ location, prevLocation }, scrollbarOptions) => {
-  /**
-   * @todo hash scroll
-   */
-}
+// export const onRouteUpdate = ({ location, prevLocation }, scrollbarOptions) => {
+//   console.log('onRouteUpdate')
+// }
 
 export const shouldUpdateScroll = ({
   routerProps: { location },
@@ -73,6 +80,8 @@ export const shouldUpdateScroll = ({
   // Scrollbar.get(document.getElementById('___gatsby')).update()
 
   scrollbarIns.update()
+
+  console.log('shouldUpdateScroll')
 
   return false
 }

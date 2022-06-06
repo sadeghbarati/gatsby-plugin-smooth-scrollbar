@@ -2,6 +2,28 @@
 import path from 'node:path'
 import { promises } from 'node:fs'
 
+// export const onCreateWebpackConfig = ({
+//   stage,
+//   rules,
+//   loaders,
+//   plugins,
+//   actions,
+// }) => {
+//   console.log('STAGE:', stage)
+//   if (stage === 'build-html') {
+//     actions.setWebpackConfig({
+//       module: {
+//         rules: [
+//           {
+//             test: /smooth-scrollbar/,
+//             use: loaders.null(),
+//           },
+//         ],
+//       },
+//     })
+//   }
+// }
+
 const htmlShadow = (className) => {
   const content = `import React from 'react'
   import PropTypes from 'prop-types'
@@ -73,14 +95,14 @@ export const onPreInit = (_, pluginOptions) => {
   //   console.log('HTML shadow created')
   // })
 
-  (async () => {
-    try {
-      await promises.writeFile(path.join(process.cwd(), 'src', 'html.js'), htmlShadow('class-example'))
-    }
-    catch (error) {
-      console.error(error)
-    }
-  })()
+  // (async () => {
+  //   try {
+  //     await promises.writeFile(path.join(process.cwd(), 'src', 'html.js'), htmlShadow('class-example'))
+  //   }
+  //   catch (error) {
+  //     console.error(error)
+  //   }
+  // })()
 
   import('read-pkg').then(async (pkg) => {
     const {
@@ -101,3 +123,4 @@ export const onPreInit = (_, pluginOptions) => {
   // pluginOptions.plugins = plugins
   // delete pluginOptions.scrollbarPlugins
 }
+

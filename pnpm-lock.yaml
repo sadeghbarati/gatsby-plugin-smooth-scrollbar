@@ -26,14 +26,14 @@ importers:
 
   demo:
     specifiers:
-      gatsby: ^4.15.1
-      gatsby-plugin-image: ^2.15.0
-      gatsby-plugin-manifest: ^4.15.0
+      gatsby: 4.15.2
+      gatsby-plugin-image: 2.15.1
+      gatsby-plugin-manifest: 4.15.1
       gatsby-plugin-pnpm: 1.2.10
       gatsby-plugin-react-helmet: ^5.15.0
-      gatsby-plugin-sharp: ^4.15.0
+      gatsby-plugin-sharp: 4.15.1
       gatsby-source-filesystem: ^4.15.0
-      gatsby-transformer-sharp: ^4.15.0
+      gatsby-transformer-sharp: 4.15.1
       gh-pages: ^4.0.0
       gsap: ^3.10.4
       prop-types: ^15.8.1
@@ -68,7 +68,10 @@ importers:
       react: 17.0.2
       read-pkg: ^7.1.0
       smooth-scrollbar: 8.7.4
+      ssr-window: ^4.0.2
       unbuild: 0.7.4
+    dependencies:
+      ssr-window: 4.0.2
     optionalDependencies:
       gsap: 3.10.4
     devDependencies:
@@ -11906,6 +11909,10 @@ packages:
     resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=}
     dev: false
 
+  /ssr-window/4.0.2:
+    resolution: {integrity: sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==}
+    dev: false
+
   /st/2.0.0:
     resolution: {integrity: sha512-drN+aGYnrZPNYIymmNwIY7LXYJ8MqsqXj4fMRue3FOgGMdGjSX10fhJ3qx0sVQPhcWxhEaN4U/eWM4O4dbYNAw==}
     hasBin: true
@@ -12144,7 +12151,7 @@ packages:
       graphql: 15.8.0
       iterall: 1.3.0
       symbol-observable: 1.2.0
-      ws: 7.4.5
+      ws: 7.4.6
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -13031,19 +13038,6 @@ packages:
       is-typedarray: 1.0.0
       signal-exit: 3.0.7
       typedarray-to-buffer: 3.1.5
-    dev: false
-
-  /ws/7.4.5:
-    resolution: {integrity: sha512-xzyu3hFvomRfXKH8vOFMU3OguG6oOvhXMo3xsGy3xWExqaM2dxBbVxuD99O7m3ZUFMvvscsZDqxfgMaRr/Nr1g==}
-    engines: {node: '>=8.3.0'}
-    peerDependencies:
-      bufferutil: ^4.0.1
-      utf-8-validate: ^5.0.2
-    peerDependenciesMeta:
-      bufferutil:
-        optional: true
-      utf-8-validate:
-        optional: true
     dev: false
 
   /ws/7.4.6:

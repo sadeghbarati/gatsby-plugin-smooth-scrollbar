@@ -7,8 +7,8 @@
 
 import type Scrollbar from 'smooth-scrollbar'
 import { ScrollbarPlugin } from 'smooth-scrollbar'
-import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -30,9 +30,6 @@ class ScrollTriggerPlugin extends ScrollbarPlugin {
 
         return scrollbar.scrollTop
       },
-      // getBoundingClientRect() {
-      //   return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight }
-      // },
     })
 
     scrollbar.addListener(ScrollTrigger.update)

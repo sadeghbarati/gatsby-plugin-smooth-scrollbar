@@ -1,6 +1,6 @@
 import { ScrollbarPlugin } from 'smooth-scrollbar';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 /*!
  * SmoothScrollbar GSAP ScrollTrigger Plugin

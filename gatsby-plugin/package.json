@@ -48,6 +48,9 @@
       "optional": true
     }
   },
+  "dependencies": {
+    "ssr-window": "^4.0.2"
+  },
   "optionalDependencies": {
     "gsap": "^3.10.4"
   },
