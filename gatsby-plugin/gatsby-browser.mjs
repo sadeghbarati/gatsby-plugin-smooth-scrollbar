@@ -1,4 +1,4 @@
-import { getWindow, getDocument, extend, ssrWindow } from 'ssr-window';
+import { getWindow, getDocument, extend, ssrDocument, ssrWindow } from 'ssr-window';
 import SmoothScrollbar from 'smooth-scrollbar';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,19 +11,18 @@ if (typeof window !== "undefined")
 let scrollbarIns;
 let scrollbarTarget;
 const plugins = {};
-const wrapRootElement = ({ element }, pluginOptions) => {
+const onClientEntry = (_, pluginOptions) => {
+  extend(ssrDocument, {
+    body: {}
+  });
+  const { scrollbarOptions } = pluginOptions;
   scrollbarTarget = pluginOptions.html ?? false ? document.querySelector("[data-gatsby-scrollbar]") : document.body;
-  console.log(scrollbarTarget);
   if (pluginOptions.gsap ?? false) {
     plugins.scrollTrigger = {
       target: scrollbarTarget
     };
     SmoothScrollbar.use(ScrollTriggerPlugin);
   }
-};
-const onClientEntry = (_, pluginOptions) => {
-  const { scrollbarOptions } = pluginOptions;
-  SmoothScrollbar.detachStyle();
   scrollbarIns = SmoothScrollbar.init(scrollbarTarget, {
     delegateTo: document,
     plugins,
@@ -60,4 +59,4 @@ const shouldUpdateScroll = ({
   return false;
 };
 
-export { onClientEntry, onInitialClientRender, shouldUpdateScroll, wrapRootElement };
+export { onClientEntry, onInitialClientRender, shouldUpdateScroll };

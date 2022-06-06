@@ -15,10 +15,17 @@ if (typeof window !== 'undefined')
 let scrollbarIns
 let scrollbarTarget
 const plugins = {}
-export const wrapRootElement = ({ element }, pluginOptions) => {
-  scrollbarTarget = pluginOptions.html ?? false ? document.querySelector('[data-gatsby-scrollbar]') : document.body
 
-  console.log(scrollbarTarget)
+export const onClientEntry = (_, pluginOptions) => {
+  extend(ssrDocument, {
+    body: {
+
+    },
+  })
+
+  const { scrollbarOptions } = pluginOptions
+
+  scrollbarTarget = pluginOptions.html ?? false ? document.querySelector('[data-gatsby-scrollbar]') : document.body
 
   if (pluginOptions.gsap ?? false) {
     plugins.scrollTrigger = {
@@ -27,12 +34,6 @@ export const wrapRootElement = ({ element }, pluginOptions) => {
 
     SmoothScrollbar.use(ScrollTriggerPlugin)
   }
-}
-
-export const onClientEntry = (_, pluginOptions) => {
-  const { scrollbarOptions } = pluginOptions
-
-  SmoothScrollbar.detachStyle()
 
   scrollbarIns = SmoothScrollbar.init(scrollbarTarget, {
     delegateTo: document,
