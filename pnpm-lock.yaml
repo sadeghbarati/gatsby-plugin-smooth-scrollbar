@@ -63,21 +63,21 @@ importers:
     specifiers:
       '@types/react': 17.0.2
       '@types/react-dom': 17.0.2
-      es6-promise: ^4.2.8
       gsap: ^3.10.4
+      just-extend: ^6.0.1
       react: 17.0.2
       read-pkg: ^7.1.0
       smooth-scrollbar: 8.7.4
       ssr-window: ^4.0.2
       unbuild: 0.7.4
     dependencies:
+      just-extend: 6.0.1
       ssr-window: 4.0.2
     optionalDependencies:
       gsap: 3.10.4
     devDependencies:
       '@types/react': 17.0.2
       '@types/react-dom': 17.0.2
-      es6-promise: 4.2.8
       react: 17.0.2
       read-pkg: 7.1.0
       smooth-scrollbar: 8.7.4
@@ -5688,6 +5688,7 @@ packages:
 
   /es6-promise/4.2.8:
     resolution: {integrity: sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==}
+    dev: false
 
   /es6-symbol/3.1.3:
     resolution: {integrity: sha512-NJ6Yn3FuDinBaBRWl/q5X/s4koRHBrgKAu+yGI6JCBeiu3qrcbJhwT2GeR/EXVfylRk8dpQVJoLEFhK+Mu31NA==}
@@ -8227,6 +8228,7 @@ packages:
 
   /gsap/3.10.4:
     resolution: {integrity: sha512-6QatdkKxXCMfvCW4rM++0RqyLQAzFX5nwl3yHS0XPgkZBkiSEY3VZVbMltrdtsbER/xZonLtyHt684wRp4erlQ==}
+    requiresBuild: true
     dev: false
 
   /gzip-size/6.0.0:
@@ -9043,6 +9045,10 @@ packages:
     dependencies:
       array-includes: 3.1.5
       object.assign: 4.1.2
+
+  /just-extend/6.0.1:
+    resolution: {integrity: sha512-CrwyGHRQ22XObWsZPQdnKlLLuCPj95OQ9HrLYdfjymCsYoYj7HPMFNrgqPW/LJjhK+CnVZAtftVSfo8Wr33RTA==}
+    dev: false
 
   /keyv/3.1.0:
     resolution: {integrity: sha512-9ykJ/46SN/9KPM/sichzQ7OvXyGDYKGTaDlKMGCAlg2UK8KRy4jb0d8sFc+0Tt0YYnThq8X2RZgCg74RPxgcVA==}

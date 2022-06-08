@@ -79,6 +79,9 @@ export default defineBuildConfig({
   },
   externals: ['gsap', 'react', 'read-pkg'],
   rollup: {
+    esbuild: {
+      tsconfig: './tsconfig.json',
+    },
     inlineDependencies: false,
     emitCJS: true,
   },

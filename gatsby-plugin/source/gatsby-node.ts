@@ -88,21 +88,16 @@ export const pluginOptionsSchema = ({ Joi }) => {
 }
 
 export const onPreInit = (_, pluginOptions) => {
-  // fs.writeFile(path.join(process.cwd(), 'src'), htmlShadow('class-example'), (err) => {
-  //   if (err)
-  //     throw err
-
-  //   console.log('HTML shadow created')
-  // })
-
-  // (async () => {
-  //   try {
-  //     await promises.writeFile(path.join(process.cwd(), 'src', 'html.js'), htmlShadow('class-example'))
-  //   }
-  //   catch (error) {
-  //     console.error(error)
-  //   }
-  // })()
+  if (pluginOptions.html ?? false) {
+    (async () => {
+      try {
+        await promises.writeFile(path.join(process.cwd(), 'src', 'html.js'), htmlShadow(pluginOptions.html.scrollbarClassName))
+      }
+      catch (error) {
+        console.error(error)
+      }
+    })()
+  }
 
   import('read-pkg').then(async (pkg) => {
     const {

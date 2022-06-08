@@ -2,6 +2,55 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
+const path = require('node:path');
+const node_fs = require('node:fs');
+
+function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e["default"] : e; }
+
+const path__default = /*#__PURE__*/_interopDefaultLegacy(path);
+
+const htmlShadow = (className) => {
+  const content = `import React from 'react'
+  import PropTypes from 'prop-types'
+
+  export default function HTML(props) {
+    return (
+      <html {...props.htmlAttributes}>
+        <head>
+          <meta charSet="utf-8" />
+          <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no"
+          />
+          {props.headComponents}
+        </head>
+        <body {...props.bodyAttributes}>
+          {props.preBodyComponents}
+          <div className="${className}" data-gatsby-scrollbar>
+            <div
+              key={'body'}
+              id="___gatsby"
+              dangerouslySetInnerHTML={{ __html: props.body }}
+            />
+          </div>
+          {props.postBodyComponents}
+        </body>
+      </html>
+    )
+  }
+
+  HTML.propTypes = {
+    htmlAttributes: PropTypes.object,
+    headComponents: PropTypes.array,
+    bodyAttributes: PropTypes.object,
+    preBodyComponents: PropTypes.array,
+    body: PropTypes.string,
+    postBodyComponents: PropTypes.array,
+  }
+  `;
+  return content;
+};
 const pluginOptionsSchema = ({ Joi }) => {
   return Joi.object().keys({
     html: Joi.object().keys({
@@ -21,6 +70,15 @@ const pluginOptionsSchema = ({ Joi }) => {
   });
 };
 const onPreInit = (_, pluginOptions) => {
+  if (pluginOptions.html ?? false) {
+    (async () => {
+      try {
+        await node_fs.promises.writeFile(path__default.join(process.cwd(), "src", "html.js"), htmlShadow(pluginOptions.html.scrollbarClassName));
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }
   import('read-pkg').then(async (pkg) => {
     const {
       dependencies
