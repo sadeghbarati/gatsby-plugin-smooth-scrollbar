@@ -70,9 +70,7 @@ const htmlShadow = (className) => {
 
 export const pluginOptionsSchema = ({ Joi }) => {
   return Joi.object().keys({
-    html: Joi.object().keys({
-      scrollbarClassName: Joi.string().default('gatsby-smooth-scrollbar'),
-    }),
+    scrollbarClassName: Joi.string().default('gatsby-smooth-scrollbar'),
     gsap: Joi.boolean().description('Enable GSAP ScrollTrigger for smooth-scrollbar'),
     scrollbarOptions: Joi.object().keys({
       damping: Joi.number().integer().min(0).max(1).description('Momentum reduction damping factor, a float value between (0, 1). The lower the value is, the more smooth the scrolling will be (also the more paint frames).'),
@@ -95,14 +93,16 @@ export const onPreInit = (_, pluginOptions) => {
   //   console.log('HTML shadow created')
   // })
 
-  // (async () => {
-  //   try {
-  //     await promises.writeFile(path.join(process.cwd(), 'src', 'html.js'), htmlShadow('class-example'))
-  //   }
-  //   catch (error) {
-  //     console.error(error)
-  //   }
-  // })()
+  // if (pluginOptions.html ?? false) {
+  //   (async () => {
+  //     try {
+  //       await promises.writeFile(path.join(process.cwd(), 'src', 'html.js'), htmlShadow(pluginOptions.html.scrollbarClassName))
+  //     }
+  //     catch (error) {
+  //       console.error(error)
+  //     }
+  //   })()
+  // }
 
   import('read-pkg').then(async (pkg) => {
     const {

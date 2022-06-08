@@ -1,4 +1,7 @@
 module.exports = {
+  flags: {
+    DEV_SSR: true
+  },
   pathPrefix: 'gatsby-plugin-smooth-scrollbar/',
   siteMetadata: {
     title: 'Gatsby Default Starter',
@@ -11,17 +14,18 @@ module.exports = {
     {
       resolve: require.resolve('../gatsby-plugin'),
       options: {
+        scrollbarClassName: 'gatsby-another-class',
         gsap: true,
         scrollbarOptions: {
-          // plugins: {
-          //   overscroll: {
-          //     enable: true,
-          //     effect: 'bounce',
-          //     damping: 0.2,
-          //     maxOverscroll: 150,
-          //     glowColor: '#222a2d',
-          //   },
-          // }
+          plugins: {
+            overscroll: {
+              enable: true,
+              effect: 'bounce',
+              damping: 0.2,
+              maxOverscroll: 150,
+              glowColor: '#222a2d',
+            },
+          }
         }
       }
     },

@@ -29,10 +29,6 @@
     ".": {
       "import": "./index.mjs",
       "require": "./index.cjs"
-    },
-    "./plugins/overscroll": {
-      "import": "./plugins/overscroll.mjs",
-      "require": "./plugins/overscroll.cjs"
     }
   },
   "scripts": {
@@ -43,12 +39,9 @@
     "gatsby": "^3.0.0 || ^4.0.0",
     "smooth-scrollbar": "8.7.4"
   },
-  "peerDependenciesMeta": {
-    "gsap": {
-      "optional": true
-    }
-  },
   "dependencies": {
+    "just-extend": "^6.0.1",
+    "just-merge": "^3.0.1",
     "ssr-window": "^4.0.2"
   },
   "optionalDependencies": {
@@ -57,7 +50,6 @@
   "devDependencies": {
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
-    "es6-promise": "^4.2.8",
     "react": "17.0.2",
     "read-pkg": "^7.1.0",
     "smooth-scrollbar": "8.7.4",

@@ -1,6 +1,6 @@
 demo
-gatsby-plugin-smooth-scrollbar/*.js
-gatsby-plugin-smooth-scrollbar/*.cjs
-gatsby-plugin-smooth-scrollbar/*.mjs
-gatsby-plugin-smooth-scrollbar/plugins/**/*
-gatsby-plugin-smooth-scrollbar/src
+gatsby-plugin/*.js
+gatsby-plugin/*.cjs
+gatsby-plugin/*.mjs
+gatsby-plugin/plugins/*
+gatsby-plugin/chunks/*

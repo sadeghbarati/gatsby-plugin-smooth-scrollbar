@@ -1,33 +1,48 @@
-import * as React from "react"
+import * as React from 'react'
 import SmoothScrollbar from 'smooth-scrollbar'
 import { gsap } from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
+import extend from 'just-extend'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+export const SmoothScrollbarContext = React.createContext({ scrollbar: null })
 
-export const SmoothScrollbarContext = React.createContext({ scrollbar: null });
-
-export const WrapRootElement = ({ element, scrollbarOptions}) => {
-  const smoothScrollbarEl = React.useRef();
-  const [state, setState] = React.useState(null);
-
+export const WrapRootElement = ({ element, className, scrollbarOptions }) => {
+  const smoothScrollbarEl = React.useRef()
+  const [state, setState] = React.useState(null)
 
   React.useEffect(() => {
-    setState(SmoothScrollbar.init(smoothScrollbarEl.current, { ...scrollbarOptions, delegateTo: document }))
-    ScrollTrigger.defaults({
-      scroller: smoothScrollbarEl.current,
-      pinType: 'transform',
-    })
-    ScrollTrigger.update();
+    gsap.registerPlugin(ScrollTrigger)
+    console.group('effectUSE')
+    console.log(smoothScrollbarEl.current)
 
-    console.log("SCROLL IN PROVIDER", ScrollTrigger.defaults())
-  }, []);
+    // setState()
+    const scrollbarVar = SmoothScrollbar.init(smoothScrollbarEl.current, extend(true, scrollbarOptions, {
+      plugins: {
+        scrollTrigger: {
+          target: smoothScrollbarEl.current,
+        },
+      },
+    }))
 
-  return (
-    <SmoothScrollbarContext.Provider value={{ state, setState }}>
-      <div className="gatsby-smooth-scrollbar" ref={smoothScrollbarEl}>
+    // ScrollTrigger.update()
+
+    console.log('SCROLL IN PROVIDER', ScrollTrigger.defaults())
+    console.log(scrollbarVar)
+
+    console.groupEnd()
+  }, [])
+
+  /*
+  <SmoothScrollbarContext.Provider value={{ state, setState }}>
+      <div className={className} ref={smoothScrollbarEl} data-gatsby-scrollbar>
         {element}
       </div>
     </SmoothScrollbarContext.Provider>
+  */
+
+  return (
+    <div className={className} ref={smoothScrollbarEl} data-gatsby-scrollbar>
+      {element}
+    </div>
   )
 }

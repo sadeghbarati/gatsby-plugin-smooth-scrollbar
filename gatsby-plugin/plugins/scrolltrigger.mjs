@@ -24,6 +24,7 @@ class ScrollTriggerPlugin extends ScrollbarPlugin {
       }
     });
     scrollbar.addListener(ScrollTrigger.update);
+    console.log(this.options.target);
     console.log("SCrollBAR SCROLLTRIGGER");
   }
 }

@@ -26,6 +26,7 @@ class ScrollTriggerPlugin extends SmoothScrollbar.ScrollbarPlugin {
       }
     });
     scrollbar.addListener(ScrollTrigger.ScrollTrigger.update);
+    console.log(this.options.target);
     console.log("SCrollBAR SCROLLTRIGGER");
   }
 }
