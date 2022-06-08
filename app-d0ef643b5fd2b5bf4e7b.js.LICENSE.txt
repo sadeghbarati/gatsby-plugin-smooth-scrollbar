@@ -28,13 +28,6 @@
  * @author: Jack Doyle, jack@greensock.com
 */
 
-/*!
- * SmoothScrollbar GSAP ScrollTrigger Plugin
- *
- * @version 1.0.1
- * @author Artem Dordzhiev (Draft)
- */
-
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
