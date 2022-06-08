@@ -1,3 +1,0 @@
-/*! For license information please see 11-1eb6c9f62006eba2fcca.js.LICENSE.txt */
-"use strict";(self.webpackChunksmooth_scrollbar_gatsby=self.webpackChunksmooth_scrollbar_gatsby||[]).push([[11],{11:function(r,o,s){const l=s(2617),t=s(1842),e=s(2557);t.gsap.registerPlugin(e.ScrollTrigger);class c extends l.ScrollbarPlugin{constructor(r,o){super(r,o),this.setProxy()}setProxy(){const r=this.scrollbar;e.ScrollTrigger.scrollerProxy(this.options.target,{scrollTop(o){return arguments.length&&(r.scrollTop=o),r.scrollTop}}),r.addListener(e.ScrollTrigger.update),console.log(this.options.target),console.log("SCrollBAR SCROLLTRIGGER")}}c.pluginName="scrollTrigger",r.exports=c}}]);
-//# sourceMappingURL=11-1eb6c9f62006eba2fcca.js.map
