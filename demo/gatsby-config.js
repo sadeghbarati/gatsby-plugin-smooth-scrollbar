@@ -11,6 +11,9 @@ module.exports = {
     {
       resolve: require.resolve('../gatsby-plugin'),
       options: {
+        html: {
+          scrollbarClassName: "html-dotjs-in-gatsby"
+        },
         gsap: true,
         scrollbarOptions: {
           plugins: {

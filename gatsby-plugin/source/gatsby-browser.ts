@@ -72,17 +72,19 @@ export const onClientEntry = (_, pluginOptions) => {
 }
 
 export const onInitialClientRender = (_, { scrollbarOptions }) => {
-  // if (document) {
-  //   if (document.querySelector('.gsap-marker-scroller-start')) {
-  //     const markers = gsap.utils.toArray('[class *= "gsap-marker"]')
+  if (document) {
+    import('gsap').then(({ default: gsap }) => {
+      if (document.querySelector('.gsap-marker-scroller-start')) {
+        const markers = gsap.utils.toArray('[class *= "gsap-marker"]')
 
-  //     if (window) {
-  //       window.smoothScrollbar.addListener(({ offset }) => {
-  //         gsap.set(markers, { marginTop: -offset.y })
-  //       })
-  //     }
-  //   }
-  // }
+        if (window) {
+          window.smoothScrollbar.addListener(({ offset }) => {
+            gsap.set(markers, { marginTop: -offset.y })
+          })
+        }
+      }
+    })
+  }
 }
 
 // export const onRouteUpdate = ({ location, prevLocation }, scrollbarOptions) => {

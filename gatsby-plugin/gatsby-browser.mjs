@@ -56,6 +56,18 @@ const onClientEntry = (_, pluginOptions) => {
   console.log(scrollbarIns);
 };
 const onInitialClientRender = (_, { scrollbarOptions }) => {
+  if (document) {
+    import('gsap').then(({ default: gsap }) => {
+      if (document.querySelector(".gsap-marker-scroller-start")) {
+        const markers = gsap.utils.toArray('[class *= "gsap-marker"]');
+        if (window) {
+          window.smoothScrollbar.addListener(({ offset }) => {
+            gsap.set(markers, { marginTop: -offset.y });
+          });
+        }
+      }
+    });
+  }
 };
 const shouldUpdateScroll = ({
   routerProps: { location },
