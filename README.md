@@ -3,18 +3,17 @@
 
 ## Gatsby Custom HTML
 
-[html.js]([HTML.js](https://www.gatsbyjs.com/docs/custom-html/))
+[html.js](https://www.gatsbyjs.com/docs/custom-html/)
 
 
 ## Ways to use `smooth-scrollbar` in gatsby
 
-1. use `custom html.js` in gatsby
-1.2 init scrollbar in `gatsby-browser` api, before client rendered you can access `html.js` custom wrapper element you created
-1.3 `onClientEntry`
-1.4 when you using gatsby `onClientEntry` api, dont init scrollbar on `#___gatsby` element gatsby will update smooth-scrollbar nodes (`scroll-content`) in another wrapper 
-2. when you using gatsby `onInitialClientRender` api, you can init scrollbar on `#___gatsby` element
-3. init scrollbar in your gatsby site without gatsby-(browser|node|ssr)
-4. use a react wrapper for smooth-scrollbar maybe in v9 :smile:
+
+- use `custom html.js` in gatsby
+- init scrollbar in `gatsby-browser` api, before client rendered you can access `html.js` custom wrapper element you created 
+- when you using gatsby `onClientEntry` api, dont init scrollbar on `#___gatsby` element gatsby will update smooth-scrollbar nodes (`scroll-content`) in another wrapper 
+- when you using gatsby `onInitialClientRender` api, you can init scrollbar on `#___gatsby` element
+- init scrollbar in your gatsby site without gatsby-(browser|node|ssr)
 
 
 ## Gatsby api run order except gatsby site
